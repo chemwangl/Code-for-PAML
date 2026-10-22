@@ -1,0 +1,26 @@
+best_score =0
+list_1=np.arange(1,21,2)#  
+list_2=np.arange(20,40,1)# 
+list_3=np.arange(10,150,10)  
+for a in list_1:
+    for b in list_2:
+        for c in list_3:
+            X_train,X_test= train_test_split(X, test_size=0.2,random_state = 6)
+            y_train,y_test = train_test_split(y, test_size=0.2,random_state = 6)
+
+      
+            from sklearn.preprocessing  import StandardScaler
+            sc = StandardScaler()
+            X_train_std = sc.fit_transform(X_train)
+            X_test_std = sc.transform(X_test)
+            from sklearn.ensemble import GradientBoostingRegressor
+            model =  GradientBoostingRegressor(max_features=b,n_estimators=c,max_depth=a,random_state=0)
+            model.fit(X_train_std,y_train)
+            y_train_pred = model.predict(X_train_std)  
+            y_test_pred =model.predict(X_test_std)
+            score=r2_score(y_test,y_test_pred)
+            if score > best_score:
+                best_score = score
+                best_parameters = {'random_state': a, 'learning_rate': b,'n_estimators': c}
+print("Best score: {:.5f}".format(best_score))
+print("Best parameters: {}".format(best_parameters))  
