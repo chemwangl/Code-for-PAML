@@ -161,3 +161,4 @@ python "Model interpretation/Fragment analysis.py"
 ```
 
 ---
+Note: The code in this repository is intended solely as sample code for research on this specific materials system.
